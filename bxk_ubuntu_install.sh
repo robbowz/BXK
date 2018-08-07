@@ -1,4 +1,4 @@
-# bxk masternode install script
+# betbook masternode install script
 # Edited by Robbowz
 VERSION="0.1"
 NODEPORT='15058'
@@ -54,12 +54,12 @@ function swaphack() {
 
 function remove_old_files() {
 	echo "Removing old files..."
-	sudo killall bxkd
+	sudo killall betbookd
 	sudo rm -rf /root/bxk
 	sudo rm -rf /root/.bxk
 	sudo rm -rf /root/.bxkcore
-    	sudo rm -rf bxkd
-    	sudo rm -rf bxk-cli
+    	sudo rm -rf betbookd
+    	sudo rm -rf betbook-cli
 	echo "Done..."
 }
 
@@ -72,12 +72,12 @@ function download_wallet() {
 	wget https://github.com/npq7721/ProjectsReleases/releases/download/Betbook-beta/Betbook-linux-beta.tar.gz
 	tar -xvf Betbook-linux-beta.tar.gz
 	rm /root/bxk/Betbook-linux-beta/Betbook-linux-beta.tar.gz
-	cp Betbook-linux-beta/bxkd /root/bxk/bxkd
-	cp Betbook-linux-beta/bxk-cli /root/bxk/bxk-cli
+	cp Betbook-linux-beta/betbookd /root/bxk/betbookd
+	cp Betbook-linux-beta/betbook-cli /root/bxk/betbook-cli
 	rm -rf Betbook-linux-beta/
 	chmod +x /root/bxk/
-	chmod +x /root/bxk/bxkd
-	chmod +x /root/bxk/bxk-cli
+	chmod +x /root/bxk/betbookd
+	chmod +x /root/bxk/betbook-cli
 	echo "Done..."
 }
 
@@ -107,7 +107,7 @@ function configure_masternode() {
 	fi
 	echo "Loading and syncing wallet..."
 	echo "    if you see *error: Could not locate RPC credentials* message, do not worry"
-	/root/bxk/bxk-cli stop
+	/root/bxk/betbook-cli stop
 	echo "It's okay."
 	sleep 10
 	echo -e "rpcuser=bxkuser\nrpcpassword=${PASSWORD}\nrpcport=${RPCPORT}\nrpcallowip=127.0.0.1\nport=${NODEPORT}\nexternalip=${WANIP}\nlisten=1\nmaxconnections=250" >> ${conffile}
@@ -117,18 +117,18 @@ function configure_masternode() {
 	echo -e "                        PLEASE WAIT 2 MINUTES"
 	echo -e "[0;35m==================================================================[0m"
 	echo ""
-	/root/bxk/bxkd -daemon
+	/root/bxk/betbookd -daemon
 	echo "2 MINUTES LEFT"
 	sleep 60
 	echo "1 MINUTE LEFT"
 	sleep 60
-	masternodekey=$(/root/bxk/bxk-cli masternode genkey)
-	/root/bxk/bxk-cli stop
+	masternodekey=$(/root/bxk/betbook-cli masternode genkey)
+	/root/bxk/betbook-cli stop
 	sleep 20
 	echo "Creating masternode config..."
 	echo -e "daemon=1\nmasternode=1\nmasternodeprivkey=$masternodekey" >> ${conffile}
 	echo "Done...Starting daemon..."
-	/root/bxk/bxkd -daemon
+	/root/bxk/betbookd -daemon
 }
 
 
@@ -156,8 +156,8 @@ function cleanup() {
 }
 
 
-#Setting auto start cron job for bxkd
-cronjob="@reboot sleep 30 && /root/bxk/bxkd"
+#Setting auto start cron job for betbookd
+cronjob="@reboot sleep 30 && /root/bxk/betbookd"
 crontab -l > tempcron
 if ! grep -q "$cronjob" tempcron; then
     echo -e "Configuring crontab job..."
