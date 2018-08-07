@@ -1,4 +1,4 @@
-# sovcoin masternode install script
+# bxk masternode install script
 # Edited by Robbowz
 VERSION="0.1"
 NODEPORT='15058'
