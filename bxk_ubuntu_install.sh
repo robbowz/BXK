@@ -3,7 +3,6 @@
 VERSION="0.1"
 NODEPORT='15058'
 RPCPORT='17866'
-
 # Useful variables
 declare -r DATE_STAMP="$(date +%y-%m-%d-%s)"
 declare -r SCRIPT_LOGFILE="/tmp/bxk_node_${DATE_STAMP}_out.log"
