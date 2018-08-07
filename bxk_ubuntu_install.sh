@@ -67,11 +67,11 @@ function remove_old_files() {
 function download_wallet() {
 	echo "Downloading wallet..."
 	mkdir /root/bxk
-    cd bxk
+        cd bxk
 	mkdir /root/.bxkcore
 	wget https://github.com/npq7721/ProjectsReleases/releases/download/Betbook-beta/Betbook-linux-beta.tar.gz
 	tar -xvf Betbook-linux-beta.tar.gz
-	rm /root/bxk/Betbook-linux-beta/Betbook-linux-beta.tar.gz
+	rm /root/bxk/Betbook-linux-beta.tar.gz
 	cp Betbook-linux-beta/betbookd /root/bxk/betbookd
 	cp Betbook-linux-beta/betbook-cli /root/bxk/betbook-cli
 	rm -rf Betbook-linux-beta/
