@@ -57,8 +57,8 @@ function remove_old_files() {
 	echo "Removing old files..."
 	sudo killall betbookd
 	sudo rm -rf /root/bxk
-	sudo rm -rf /root/.bxk
-	sudo rm -rf /root/.bxkcore
+	sudo rm -rf /root/.betbook
+	sudo rm -rf /root/.betbookcore
     	sudo rm -rf betbookd
     	sudo rm -rf betbook-cli
 	echo "Done..."
@@ -69,7 +69,7 @@ function download_wallet() {
 	echo "Downloading wallet..."
 	mkdir /root/bxk
         cd bxk
-	mkdir /root/.bxkcore
+	mkdir /root/.betbookcore
 	wget https://github.com/npq7721/ProjectsReleases/releases/download/Betbook-beta/Betbook-linux-beta.tar.gz
 	tar -xvf Betbook-linux-beta.tar.gz
 	rm /root/bxk/Betbook-linux-beta.tar.gz
@@ -101,7 +101,7 @@ function configure_firewall() {
 
 function configure_masternode() {
 	echo "Configuring masternode..."
-	conffile=/root/.bxkcore/bxk.conf
+	conffile=/root/.betbookcore/betbook.conf
 	PASSWORD=`pwgen -1 20 -n` &>> ${SCRIPT_LOGFILE}
 	if [ "x$PASSWORD" = "x" ]; then
 	    PASSWORD=${WANIP}-`date +%s`
