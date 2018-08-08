@@ -1,6 +1,6 @@
 # betbook masternode install script
 # Edited by Robbowz
-VERSION="0.2"
+VERSION="0.3"
 NODEPORT='15058'
 RPCPORT='17866'
 
